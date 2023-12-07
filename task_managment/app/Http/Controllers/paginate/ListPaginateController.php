@@ -8,11 +8,31 @@ use App\Models\Post;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
+use App\Traits\TestTrait;
+use App\Helpers\Helper2;
+use App\Services\InterfaceService;
 
 class ListPaginateController extends Controller
 {
-    public function index(request $request){
+    public function __construct(InterfaceService $service){
+        //traits
+        // $data = TestTrait::test();
+        // $data = TestTrait::test2();
 
+        //helper function with composer .json file
+        // $data = data();
+        //helper2 function  with simple class 
+        // $data = Helper2::helperTest();
+
+        ///for service provider with interface and singleton 
+        // $data = $service->interfaceFunction();
+
+        
+        // dd($data);
+
+    }
+    public function index(request $request){
+        
         $post = Post::paginate(10);
         if($request->search!=''){
             $post = Post::where('name','like','%'.$request->search.'%')->get();
